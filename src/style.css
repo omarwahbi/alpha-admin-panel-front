@@ -1,0 +1,11 @@
+.login {
+  height: 100vh;
+}
+.add-button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+.add-button {
+  margin-right: 10px;
+  margin-top: 10px;
+}
