@@ -10,6 +10,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const login = async (input) => {
     const res = await Api.post("/auth/login", input);
+    console.log(res);
     setCurrentUser(res.data);
   };
 
