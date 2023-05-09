@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Components/Navbar";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "../Components/Api";
 
 export default function AboutUs() {
   const navigate = useNavigate();
@@ -9,7 +9,7 @@ export default function AboutUs() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("/aboutUs");
+        const res = await api.get("/aboutUs");
         setAboutUs(res.data[0]);
       } catch (error) {
         console.log(error);
@@ -26,7 +26,7 @@ export default function AboutUs() {
   };
   const handelEdit = async () => {
     try {
-      await axios.put("/aboutUs/edit", {
+      await api.put("/aboutUs/edit", {
         company_description: aboutUs.company_description,
         years_experince: aboutUs.years_experince,
         num_projects: aboutUs.num_projects,

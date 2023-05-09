@@ -1,6 +1,6 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import api from "../Components/Api";
 
 export default function Project() {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ export default function Project() {
   useEffect(() => {
     const handleView = async () => {
       return new Promise((resolve, reject) => {
-        axios
+        api
           .get(`/projects/${id}`)
           .then((res) => {
             setProject(res.data.projectData[0]);
@@ -41,7 +41,7 @@ export default function Project() {
 
     const fetchCategories = async () => {
       try {
-        const res = await axios.get("/categories");
+        const res = await api.get("/categories");
         setCategories(res.data);
       } catch (err) {
         console.log(err);
@@ -51,7 +51,7 @@ export default function Project() {
     handleView()
       .then(async (projectData) => {
         try {
-          const res = await axios.get(
+          const res = await api.get(
             `/categories/${projectData.project_category_ID}`
           );
           setCategory(res.data);
@@ -98,7 +98,7 @@ export default function Project() {
   };
   const handelEdit = async () => {
     try {
-      await axios.put(`/projects/${id}`, {
+      await api.put(`/projects/${id}`, {
         project_name: project.project_name,
         project_cover_URL: project.project_cover_URL,
         project_category_ID: project.project_category_ID,
@@ -127,7 +127,7 @@ export default function Project() {
 
   const handelDelete = async (id) => {
     try {
-      await axios.delete(`/projects/${id}`);
+      await api.delete(`/projects/${id}`);
       navigate("/projects");
     } catch (error) {
       if (error.response.status === 403 || error.response.status === 401) {

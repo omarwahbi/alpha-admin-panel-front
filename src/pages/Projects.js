@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Components/Navbar";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import api from "../Components/Api";
 
 export default function Projects() {
   const [projects, setProjects] = useState([]);
@@ -13,7 +13,7 @@ export default function Projects() {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const res = await axios.get("/projects");
+        const res = await api.get("/projects");
         setProjects(res.data);
       } catch (err) {
         console.log(err);
@@ -21,7 +21,7 @@ export default function Projects() {
     };
     const fetchCategories = async () => {
       try {
-        const res = await axios.get("/categories");
+        const res = await api.get("/categories");
         setCategories(res.data);
       } catch (err) {
         console.log(err);
@@ -57,7 +57,7 @@ export default function Projects() {
   };
   const handelAdd = async (project) => {
     try {
-      await axios.post(`/projects`, {
+      await api.post(`/projects`, {
         project_name: project.project_name,
         project_cover_URL: project.project_cover_URL,
         project_category_ID: project.category_ID,

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Components/Navbar";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "../Components/Api";
 export default function Categories() {
   const [categories, setCategories] = useState([]);
   const [category, setCategory] = useState([]);
@@ -9,7 +9,7 @@ export default function Categories() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("/categories");
+        const res = await api.get("/categories");
         setCategories(res.data);
       } catch (err) {
         console.log(err);
@@ -19,7 +19,7 @@ export default function Categories() {
   }, []);
   const handelview = async (id) => {
     try {
-      const res = await axios.get(`/categories/${id}`);
+      const res = await api.get(`/categories/${id}`);
       setCategory(res.data[0]);
     } catch (error) {
       if (error.response.status === 403 || error.response.status === 401) {
@@ -29,7 +29,7 @@ export default function Categories() {
   };
   const handelDelete = async (id) => {
     try {
-      await axios.delete(`/categories/${id}`);
+      await api.delete(`/categories/${id}`);
       window.location.reload();
     } catch (error) {
       if (error.response.status === 403 || error.response.status === 401) {
@@ -46,7 +46,7 @@ export default function Categories() {
   };
   const handelEdit = async (category) => {
     try {
-      await axios.put(`/categories/${category.ID}`, {
+      await api.put(`/categories/${category.ID}`, {
         category_name: category.category_name,
       });
       window.location.reload();
@@ -59,7 +59,7 @@ export default function Categories() {
   const handelAdd = async (category) => {
     console.log(category);
     try {
-      await axios.post(`/categories`, {
+      await api.post(`/categories`, {
         category_name: category.category_name,
       });
       window.location.reload();

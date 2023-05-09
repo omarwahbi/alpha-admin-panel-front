@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Components/Navbar";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "../Components/Api";
 
 export default function ContactUs() {
   const [forms, setForms] = useState([]);
@@ -10,7 +10,7 @@ export default function ContactUs() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("/contactUs");
+        const res = await api.get("/contactUs");
         setForms(res.data);
       } catch (err) {
         console.log(err);
@@ -20,7 +20,7 @@ export default function ContactUs() {
   }, []);
   const handelview = async (id) => {
     try {
-      const res = await axios.get(`/contactUs/${id}`);
+      const res = await api.get(`/contactUs/${id}`);
       setForm(res.data[0]);
     } catch (error) {
       if (error.response.status === 403 || error.response.status === 401) {
@@ -30,7 +30,7 @@ export default function ContactUs() {
   };
   const handelDelete = async (id) => {
     try {
-      await axios.delete(`/contactUs/${id}`);
+      await api.delete(`/contactUs/${id}`);
       window.location.reload();
     } catch (error) {
       if (error.response.status === 403 || error.response.status === 401) {

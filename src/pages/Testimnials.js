@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Components/Navbar";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "../Components/Api";
 
 export default function Testimnials() {
   const [testimonials, setTestimonials] = useState([]);
@@ -10,7 +10,7 @@ export default function Testimnials() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("/testimonials");
+        const res = await api.get("/testimonials");
         setTestimonials(res.data);
       } catch (err) {
         console.log(err);
@@ -20,7 +20,7 @@ export default function Testimnials() {
   }, []);
   const handelview = async (id) => {
     try {
-      const res = await axios.get(`/testimonials/${id}`);
+      const res = await api.get(`/testimonials/${id}`);
       setTestimonial(res.data[0]);
     } catch (error) {
       if (error.response.status === 403 || error.response.status === 401) {
@@ -30,7 +30,7 @@ export default function Testimnials() {
   };
   const handelDelete = async (id) => {
     try {
-      await axios.delete(`/testimonials/${id}`);
+      await api.delete(`/testimonials/${id}`);
       window.location.reload();
     } catch (error) {
       if (error.response.status === 403 || error.response.status === 401) {
@@ -47,7 +47,7 @@ export default function Testimnials() {
   };
   const handelEdit = async (testimonial) => {
     try {
-      await axios.put(`/testimonials/${testimonial.ID}`, {
+      await api.put(`/testimonials/${testimonial.ID}`, {
         company_name: testimonial.company_name,
         text: testimonial.text,
       });
@@ -61,7 +61,7 @@ export default function Testimnials() {
   const handelAdd = async (testimonial) => {
     console.log(testimonial);
     try {
-      await axios.post(`/testimonials`, {
+      await api.post(`/testimonials`, {
         company_name: testimonial.company_name,
         text: testimonial.text,
       });

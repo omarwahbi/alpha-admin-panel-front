@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Components/Navbar";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "../Components/Api";
 
 export default function Logos() {
   const [logos, setLogos] = useState([]);
@@ -10,7 +10,7 @@ export default function Logos() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("/logos");
+        const res = await api.get("/logos");
         setLogos(res.data);
       } catch (err) {
         console.log(err);
@@ -20,7 +20,7 @@ export default function Logos() {
   }, []);
   const handelview = async (id) => {
     try {
-      const res = await axios.get(`/logos/${id}`);
+      const res = await api.get(`/logos/${id}`);
       setLogo(res.data[0]);
     } catch (error) {
       if (error.response.status === 403 || error.response.status === 401) {
@@ -30,7 +30,7 @@ export default function Logos() {
   };
   const handelDelete = async (id) => {
     try {
-      await axios.delete(`/logos/${id}`);
+      await api.delete(`/logos/${id}`);
       window.location.reload();
     } catch (error) {
       if (error.response.status === 403 || error.response.status === 401) {
@@ -47,7 +47,7 @@ export default function Logos() {
   };
   const handelEdit = async (logo) => {
     try {
-      await axios.put(`/logos/${logo.ID}`, {
+      await api.put(`/logos/${logo.ID}`, {
         company_name: logo.company_name,
         logo_url: logo.logo_url,
       });
@@ -60,7 +60,7 @@ export default function Logos() {
   };
   const handelAdd = async (logo) => {
     try {
-      await axios.post(`/logos`, {
+      await api.post(`/logos`, {
         company_name: logo.company_name,
         logo_url: logo.logo_url,
       });

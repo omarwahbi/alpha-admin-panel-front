@@ -1,4 +1,4 @@
-import axios from "axios";
+import Api from "../Components/Api.js";
 import React, { createContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext(); // Create a context using createContext()
@@ -9,12 +9,12 @@ export const AuthContextProvider = ({ children }) => {
   );
 
   const login = async (input) => {
-    const res = await axios.post("/auth/login", input);
+    const res = await Api.post("/auth/login", input);
     setCurrentUser(res.data);
   };
 
   const logout = async () => {
-    await axios.post("/auth/logout");
+    await Api.post("/auth/logout");
     setCurrentUser(null);
   };
 
