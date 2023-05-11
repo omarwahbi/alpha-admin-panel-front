@@ -98,13 +98,17 @@ export default function Project() {
   };
   const handelEdit = async () => {
     try {
-      await api.put(`/projects/${id}`, {
-        project_name: project.project_name,
-        project_cover_URL: project.project_cover_URL,
-        project_category_ID: project.project_category_ID,
-        project_ID: project.project_ID,
-        img_URL: inputValues,
-      });
+      await api.put(
+        `/projects/${id}`,
+        {
+          project_name: project.project_name,
+          project_cover_URL: project.project_cover_URL,
+          project_category_ID: project.project_category_ID,
+          project_ID: project.project_ID,
+          img_URL: inputValues,
+        },
+        { withCredentials: true }
+      );
       window.location.reload();
     } catch (error) {
       if (
@@ -127,7 +131,7 @@ export default function Project() {
 
   const handelDelete = async (id) => {
     try {
-      await api.delete(`/projects/${id}`);
+      await api.delete(`/projects/${id}`, { withCredentials: true });
       navigate("/projects");
     } catch (error) {
       if (error.response.status === 403 || error.response.status === 401) {

@@ -26,11 +26,15 @@ export default function AboutUs() {
   };
   const handelEdit = async () => {
     try {
-      await api.put("/aboutUs/edit", {
-        company_description: aboutUs.company_description,
-        years_experince: aboutUs.years_experince,
-        num_projects: aboutUs.num_projects,
-      });
+      await api.put(
+        "/aboutUs/edit",
+        {
+          company_description: aboutUs.company_description,
+          years_experince: aboutUs.years_experince,
+          num_projects: aboutUs.num_projects,
+        },
+        { withCredentials: true }
+      );
       window.location.reload();
     } catch (error) {
       if (error.response.status === 401 || error.response.status === 403) {

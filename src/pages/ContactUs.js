@@ -30,7 +30,7 @@ export default function ContactUs() {
   };
   const handelDelete = async (id) => {
     try {
-      await api.delete(`/contactUs/${id}`);
+      await api.delete(`/contactUs/${id}`, { withCredentials: true });
       window.location.reload();
     } catch (error) {
       if (error.response.status === 403 || error.response.status === 401) {

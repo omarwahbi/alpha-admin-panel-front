@@ -57,15 +57,19 @@ export default function Projects() {
   };
   const handelAdd = async (project) => {
     try {
-      await api.post(`/projects`, {
-        project_name: project.project_name,
-        project_cover_URL: project.project_cover_URL,
-        project_category_ID: project.category_ID,
-        time: new Date().toISOString().slice(11, 19),
-        date: new Date().toISOString().slice(0, 10),
-        project_ID: project.project_ID,
-        img_URL: inputValues,
-      });
+      await api.post(
+        `/projects`,
+        {
+          project_name: project.project_name,
+          project_cover_URL: project.project_cover_URL,
+          project_category_ID: project.category_ID,
+          time: new Date().toISOString().slice(11, 19),
+          date: new Date().toISOString().slice(0, 10),
+          project_ID: project.project_ID,
+          img_URL: inputValues,
+        },
+        { withCredentials: true }
+      );
       window.location.reload();
     } catch (error) {
       if (error.response.status === 403 || error.response.status === 401) {

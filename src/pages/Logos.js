@@ -30,7 +30,7 @@ export default function Logos() {
   };
   const handelDelete = async (id) => {
     try {
-      await api.delete(`/logos/${id}`);
+      await api.delete(`/logos/${id}`, { withCredentials: true });
       window.location.reload();
     } catch (error) {
       if (error.response.status === 403 || error.response.status === 401) {
@@ -47,10 +47,14 @@ export default function Logos() {
   };
   const handelEdit = async (logo) => {
     try {
-      await api.put(`/logos/${logo.ID}`, {
-        company_name: logo.company_name,
-        logo_url: logo.logo_url,
-      });
+      await api.put(
+        `/logos/${logo.ID}`,
+        {
+          company_name: logo.company_name,
+          logo_url: logo.logo_url,
+        },
+        { withCredentials: true }
+      );
       window.location.reload();
     } catch (error) {
       if (error.response.status === 403 || error.response.status === 401) {
@@ -60,10 +64,14 @@ export default function Logos() {
   };
   const handelAdd = async (logo) => {
     try {
-      await api.post(`/logos`, {
-        company_name: logo.company_name,
-        logo_url: logo.logo_url,
-      });
+      await api.post(
+        `/logos`,
+        {
+          company_name: logo.company_name,
+          logo_url: logo.logo_url,
+        },
+        { withCredentials: true }
+      );
       window.location.reload();
     } catch (error) {
       if (error.response.status === 403 || error.response.status === 401) {

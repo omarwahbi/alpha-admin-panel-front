@@ -29,7 +29,7 @@ export default function Categories() {
   };
   const handelDelete = async (id) => {
     try {
-      await api.delete(`/categories/${id}`);
+      await api.delete(`/categories/${id}`, { withCredentials: true });
       window.location.reload();
     } catch (error) {
       if (error.response.status === 403 || error.response.status === 401) {
@@ -46,9 +46,13 @@ export default function Categories() {
   };
   const handelEdit = async (category) => {
     try {
-      await api.put(`/categories/${category.ID}`, {
-        category_name: category.category_name,
-      });
+      await api.put(
+        `/categories/${category.ID}`,
+        {
+          category_name: category.category_name,
+        },
+        { withCredentials: true }
+      );
       window.location.reload();
     } catch (error) {
       if (error.response.status === 403 || error.response.status === 401) {
@@ -59,9 +63,13 @@ export default function Categories() {
   const handelAdd = async (category) => {
     console.log(category);
     try {
-      await api.post(`/categories`, {
-        category_name: category.category_name,
-      });
+      await api.post(
+        `/categories`,
+        {
+          category_name: category.category_name,
+        },
+        { withCredentials: true }
+      );
       window.location.reload();
     } catch (error) {
       if (error.response.status === 403 || error.response.status === 401) {

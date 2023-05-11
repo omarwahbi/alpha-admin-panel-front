@@ -30,7 +30,7 @@ export default function Testimnials() {
   };
   const handelDelete = async (id) => {
     try {
-      await api.delete(`/testimonials/${id}`);
+      await api.delete(`/testimonials/${id}`, { withCredentials: true });
       window.location.reload();
     } catch (error) {
       if (error.response.status === 403 || error.response.status === 401) {
@@ -47,10 +47,14 @@ export default function Testimnials() {
   };
   const handelEdit = async (testimonial) => {
     try {
-      await api.put(`/testimonials/${testimonial.ID}`, {
-        company_name: testimonial.company_name,
-        text: testimonial.text,
-      });
+      await api.put(
+        `/testimonials/${testimonial.ID}`,
+        {
+          company_name: testimonial.company_name,
+          text: testimonial.text,
+        },
+        { withCredentials: true }
+      );
       window.location.reload();
     } catch (error) {
       if (error.response.status === 403 || error.response.status === 401) {
@@ -61,10 +65,14 @@ export default function Testimnials() {
   const handelAdd = async (testimonial) => {
     console.log(testimonial);
     try {
-      await api.post(`/testimonials`, {
-        company_name: testimonial.company_name,
-        text: testimonial.text,
-      });
+      await api.post(
+        `/testimonials`,
+        {
+          company_name: testimonial.company_name,
+          text: testimonial.text,
+        },
+        { withCredentials: true }
+      );
       window.location.reload();
     } catch (error) {
       if (error.response.status === 403 || error.response.status === 401) {

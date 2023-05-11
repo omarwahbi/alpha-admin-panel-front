@@ -1,7 +1,9 @@
 import Api from "../Components/Api.js";
 import React, { createContext, useEffect, useState } from "react";
+import Cookies from "universal-cookie";
 
 export const AuthContext = createContext(); // Create a context using createContext()
+const cookies = new Cookies();
 
 export const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(
@@ -10,12 +12,17 @@ export const AuthContextProvider = ({ children }) => {
 
   const login = async (input) => {
     const res = await Api.post("/auth/login", input);
-    console.log(Api);
+    cookies.set("access_token", res.data, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    });
     setCurrentUser(res.data);
   };
 
   const logout = async () => {
     await Api.post("/auth/logout");
+    cookies.remove("access_token");
     setCurrentUser(null);
   };
 
