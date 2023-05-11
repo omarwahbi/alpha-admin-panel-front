@@ -16,7 +16,7 @@ export const AuthContextProvider = ({ children }) => {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-      domain: "alpha-admin-panel-backend.vercel.app",
+      domain: "alpha-admin-panel-front.vercel.app",
     });
     setCurrentUser(res.data);
   };
