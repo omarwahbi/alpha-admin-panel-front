@@ -14,7 +14,7 @@ export const AuthContextProvider = ({ children }) => {
     const res = await Api.post("/auth/login", input);
     cookies.set("access_token", res.data, {
       httpOnly: false,
-      secure: true,
+      secure: false,
       sameSite: "none",
     });
     setCurrentUser(res.data);
