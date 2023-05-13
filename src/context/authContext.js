@@ -13,7 +13,7 @@ export const AuthContextProvider = ({ children }) => {
   const login = async (input) => {
     const res = await Api.post("/auth/login", input);
     cookies.set("access_token", res.data, {
-      httpOnly: false,
+      httpOnly: true,
       secure: true,
       sameSite: "none",
     });
