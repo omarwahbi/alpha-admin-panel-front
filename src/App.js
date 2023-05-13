@@ -8,7 +8,8 @@ import Project from "./pages/Project";
 import Logos from "./pages/Logos";
 import Categories from "./pages/Categories";
 import ContactUs from "./pages/ContactUs";
-axios.defaults.withCredentials = true;
+import api from "./Components/Api";
+api.defaults.withCredentials = true;
 const router = createBrowserRouter([
   {
     path: "/",
