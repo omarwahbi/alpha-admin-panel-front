@@ -16,7 +16,6 @@ export const AuthContextProvider = ({ children }) => {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-      domain: ".vercel.app",
     });
     setCurrentUser(res.data);
   };
