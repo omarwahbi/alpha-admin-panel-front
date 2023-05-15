@@ -2,7 +2,7 @@
 
 import { createContext, useState, useEffect } from "react";
 import Cookies from "universal-cookie";
-import Api from "./Api";
+import Api from "../Components/Api";
 
 export const AuthContext = createContext();
 

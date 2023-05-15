@@ -10,10 +10,10 @@ import Categories from "./pages/Categories";
 import ContactUs from "./pages/ContactUs";
 import api from "./Components/Api";
 import { AuthContext } from "./context/authContext";
+import { useContext } from "react";
 // import api from "./Components/Api";
 // api.defaults.withCredentials = true;
-const { accessToken } = useContext(AuthContext);
-api.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -53,6 +53,8 @@ const router = createBrowserRouter([
   },
 ]);
 function App() {
+  const { accessToken } = useContext(AuthContext);
+  api.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
   return <RouterProvider router={router} />;
 }
 
