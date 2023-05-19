@@ -61,7 +61,6 @@ export default function Testimnials() {
   };
   const handelAdd = async (testimonial) => {
     let accessToken = Cookies.get("access_token");
-    console.log(accessToken);
     try {
       await api.post(
         `/testimonials`,
@@ -75,11 +74,11 @@ export default function Testimnials() {
           },
         }
       );
-      console.log(accessToken);
+
       window.location.reload();
     } catch (error) {
       if (error.response.status === 403 || error.response.status === 401) {
-        console.log(error);
+        console.log(accessToken);
         navigate("/login");
       }
     }
