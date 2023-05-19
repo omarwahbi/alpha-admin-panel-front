@@ -1,5 +1,5 @@
 import Api from "../Components/Api.js";
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext } from "react";
 import Cookies from "js-cookie";
 
 export const AuthContext = createContext(); // Create a context using createContext()
@@ -15,12 +15,12 @@ export const AuthContextProvider = ({ children }) => {
     Cookies.remove("access_token");
   };
 
-  useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(currentUser)); // Provide a key for storing the value in localStorage
-  }, [currentUser]); // Add currentUser as a dependency in the dependency array
+  // useEffect(() => {
+  //   localStorage.setItem("user", JSON.stringify(currentUser)); // Provide a key for storing the value in localStorage
+  // }, [currentUser]); // Add currentUser as a dependency in the dependency array
 
   return (
-    <AuthContext.Provider value={{ currentUser, login, logout }}>
+    <AuthContext.Provider value={{ login, logout }}>
       {children}
     </AuthContext.Provider>
   );

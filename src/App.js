@@ -8,9 +8,7 @@ import Project from "./pages/Project";
 import Logos from "./pages/Logos";
 import Categories from "./pages/Categories";
 import ContactUs from "./pages/ContactUs";
-import api from "./Components/Api";
-import { AuthContext } from "./context/authContext";
-import { useContext } from "react";
+
 // import api from "./Components/Api";
 // api.defaults.withCredentials = true;
 
