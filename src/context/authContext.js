@@ -12,12 +12,13 @@ export const AuthContextProvider = ({ children }) => {
 
   const login = async (input) => {
     const res = await Api.post("/auth/login", input);
-    cookies.set("access_token", res.data, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
-      domain: ".vercel.app",
-    });
+    console.log(res);
+    // cookies.set("token", res.data, {
+    //   httpOnly: true,
+    //   secure: true,
+    //   sameSite: "none",
+    //   domain: ".vercel.app",
+    // });
     setCurrentUser(res.data);
   };
 
