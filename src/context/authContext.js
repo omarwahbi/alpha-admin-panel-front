@@ -7,7 +7,7 @@ export const AuthContext = createContext(); // Create a context using createCont
 export const AuthContextProvider = ({ children }) => {
   const login = async (input) => {
     const res = await Api.post("/auth/login", input);
-    Cookies.set("access_token", res.data.token, { expires: 7 });
+    return Cookies.set("access_token", res.data.token, { expires: 7 });
   };
 
   const logout = async () => {
