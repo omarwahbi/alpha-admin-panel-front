@@ -72,7 +72,6 @@ export default function Testimnials() {
           text: testimonial.text,
         },
         {
-          headers: { "X-Requested-With": "XMLHttpRequest" },
           withCredentials: true,
         }
       );
