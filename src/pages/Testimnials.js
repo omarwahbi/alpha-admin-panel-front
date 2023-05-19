@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../Components/Navbar";
 import { useNavigate } from "react-router-dom";
 import api from "../Components/Api";
+import Cookies from "js-cookie";
 
 export default function Testimnials() {
   const [testimonials, setTestimonials] = useState([]);
@@ -59,14 +60,7 @@ export default function Testimnials() {
     }
   };
   const handelAdd = async (testimonial) => {
-    const cookies = document.cookie.split(";").map((cookie) => cookie.trim());
-    let accessToken = null;
-
-    cookies.forEach((cookie) => {
-      if (cookie.startsWith("access_token=")) {
-        accessToken = cookie.substring("access_token=".length);
-      }
-    });
+    let accessToken = Cookies.get("access_token");
     try {
       await api.post(
         `/testimonials`,
@@ -80,6 +74,7 @@ export default function Testimnials() {
           },
         }
       );
+      console.log(accessToken);
       window.location.reload();
     } catch (error) {
       if (error.response.status === 403 || error.response.status === 401) {
