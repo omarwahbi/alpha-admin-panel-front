@@ -18,6 +18,7 @@ export const AuthContextProvider = ({ children }) => {
       sameSite: "none",
       domain: window.location.hostname,
     });
+    console.log(res.data.token);
     setCurrentUser(res.data);
   };
 
