@@ -71,11 +71,15 @@ export default function Testimnials() {
           company_name: testimonial.company_name,
           text: testimonial.text,
         },
-        { withCredentials: true }
+        {
+          headers: { "X-Requested-With": "XMLHttpRequest" },
+          withCredentials: true,
+        }
       );
       window.location.reload();
     } catch (error) {
       if (error.response.status === 403 || error.response.status === 401) {
+        console.log(error);
         navigate("/login");
       }
     }
