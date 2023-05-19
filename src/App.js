@@ -53,8 +53,8 @@ const router = createBrowserRouter([
   },
 ]);
 function App() {
-  const { accessToken } = useContext(AuthContext);
-  api.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+  // const { accessToken } = useContext(AuthContext);
+  // api.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
   return <RouterProvider router={router} />;
 }
 
