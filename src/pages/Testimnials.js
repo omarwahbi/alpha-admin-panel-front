@@ -61,6 +61,7 @@ export default function Testimnials() {
   };
   const handelAdd = async (testimonial) => {
     let accessToken = Cookies.get("access_token");
+    console.log(accessToken);
     try {
       await api.post(
         `/testimonials`,
