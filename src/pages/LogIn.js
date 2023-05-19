@@ -17,8 +17,7 @@ export default function LogIn() {
   const handelSubmit = async (e) => {
     e.preventDefault();
     try {
-      const logInData = await login(input);
-      Cookies.set("access_token", logInData.res, { expires: 7 });
+      await login(input);
       navigate("/testimonials");
     } catch (error) {
       console.log(error);
