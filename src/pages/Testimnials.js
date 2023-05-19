@@ -46,6 +46,19 @@ export default function Testimnials() {
     }));
   };
   const handelEdit = async (testimonial) => {
+    try {
+      await api.put(`/testimonials/${testimonial.ID}`, {
+        company_name: testimonial.company_name,
+        text: testimonial.text,
+      });
+      window.location.reload();
+    } catch (error) {
+      if (error.response.status === 403 || error.response.status === 401) {
+        navigate("/login");
+      }
+    }
+  };
+  const handelAdd = async (testimonial) => {
     const cookies = document.cookie.split(";").map((cookie) => cookie.trim());
     let accessToken = null;
 
@@ -55,8 +68,8 @@ export default function Testimnials() {
       }
     });
     try {
-      await api.put(
-        `/testimonials/${testimonial.ID}`,
+      await api.post(
+        `/testimonials`,
         {
           company_name: testimonial.company_name,
           text: testimonial.text,
@@ -65,26 +78,6 @@ export default function Testimnials() {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
-        }
-      );
-      window.location.reload();
-    } catch (error) {
-      if (error.response.status === 403 || error.response.status === 401) {
-        navigate("/login");
-      }
-    }
-  };
-  const handelAdd = async (testimonial) => {
-    console.log(testimonial);
-    try {
-      await api.post(
-        `/testimonials`,
-        {
-          company_name: testimonial.company_name,
-          text: testimonial.text,
-        },
-        {
-          withCredentials: true,
         }
       );
       window.location.reload();
