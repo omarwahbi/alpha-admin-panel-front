@@ -18,7 +18,7 @@ export default function LogIn() {
     e.preventDefault();
     try {
       const logInData = await login(input);
-      Cookies.set("access_token", logInData.res.token, { expires: 7 });
+      Cookies.set("access_token", logInData.res, { expires: 7 });
       navigate("/testimonials");
     } catch (error) {
       console.log(error);
