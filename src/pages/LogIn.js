@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
+import Cookies from "js-cookie";
 
 export default function LogIn() {
   const [input, setInput] = useState({
@@ -16,7 +17,9 @@ export default function LogIn() {
   const handelSubmit = async (e) => {
     e.preventDefault();
     try {
-      await login(input);
+      const logInData = await login(input);
+      Cookies.set("access_token", res.data.token, { expires: 7 });
+
       navigate("/testimonials");
     } catch (error) {
       console.log(error);
