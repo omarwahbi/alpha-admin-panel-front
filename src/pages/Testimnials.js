@@ -46,6 +46,14 @@ export default function Testimnials() {
     }));
   };
   const handelEdit = async (testimonial) => {
+    const cookies = document.cookie.split(";").map((cookie) => cookie.trim());
+    let accessToken = null;
+
+    cookies.forEach((cookie) => {
+      if (cookie.startsWith("access_token=")) {
+        accessToken = cookie.substring("access_token=".length);
+      }
+    });
     try {
       await api.put(
         `/testimonials/${testimonial.ID}`,
@@ -53,7 +61,11 @@ export default function Testimnials() {
           company_name: testimonial.company_name,
           text: testimonial.text,
         },
-        { withCredentials: true }
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
       );
       window.location.reload();
     } catch (error) {
