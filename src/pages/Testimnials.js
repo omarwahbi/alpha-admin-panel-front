@@ -63,18 +63,10 @@ export default function Testimnials() {
     let accessToken = Cookies.get("access_token");
     console.log(accessToken);
     try {
-      await api.post(
-        `/testimonials`,
-        {
-          company_name: testimonial.company_name,
-          text: testimonial.text,
-        },
-        {
-          headers: {
-            Authorization: accessToken,
-          },
-        }
-      );
+      await api.post(`/testimonials`, {
+        company_name: testimonial.company_name,
+        text: testimonial.text,
+      });
 
       window.location.reload();
     } catch (error) {
